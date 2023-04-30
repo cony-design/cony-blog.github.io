@@ -1,0 +1,36 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import '../../../app/public/wp-includes/css/dist/block-library/style.min.css'
+import '../../../app/public/wp-content/themes/arkhe/dist/css/main.css'
+
+const { slug } = Astro.params;
+const res = await fetch(`${import.meta.env.PUBLIC_API_URL}posts?_embed&slug=${slug}`);
+const [post] = await res.json();
+const renderedContent = post.content.rendered.replace(/http:\/\/astro-blog.local/g, '');
+
+export async function getStaticPaths() {
+  const data = await fetch(`${import.meta.env.PUBLIC_API_URL}posts`);
+  const posts = await data.json();
+
+  return posts.map((post:any) => ({
+    params: { slug: post.slug },
+    props: { post: post },
+  }));
+}
+
+---
+
+<Layout title={post.title.rendered}>
+  <div class="l-content__body l-container">
+    <a href="/">Astro Blog</a>
+     <main class="l-main">
+      <article class="l-main__body">
+        <h1 class="c-pageTitle__main" set:html={post.title.rendered} />
+        <div class="c-postContent">
+          <Fragment set:html={renderedContent} />
+        </div>
+      </article>
+    </main>
+  </div>
+</Layout>
+

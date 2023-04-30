@@ -1,0 +1,17 @@
+{
+  "name": "astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "copy": "node -e \"require('fs-extra').copySync('./app/public/wp-content/uploads', './public/wp-content/uploads')\"",
+    "dev": "npm run copy && astro dev",
+    "start": "astro dev",
+    "build": "npm run copy && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^2.3.1",
+    "fs-extra": "^11.1.1"
+  }
+}

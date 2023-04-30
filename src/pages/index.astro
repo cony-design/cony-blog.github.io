@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro"
+
+let res = await fetch(`${import.meta.env.PUBLIC_API_URL}posts`)
+let posts = await res.json();
+---
+<Layout title="Blog">
+  <section>
+    <h1>List of Blog</h1>
+    {
+      posts.map((post) => (
+        <article>
+          <h2>
+            <a href={`/blog/${post.slug}/`} set:html={post.title.rendered} />
+          </h2>
+          <Fragment set:html={post.content.rendered} />
+        </article>
+      ))
+    }
+  </section>
+</Layout>
+
