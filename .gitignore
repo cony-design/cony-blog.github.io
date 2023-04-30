@@ -22,7 +22,7 @@ pnpm-debug.log*
 .vscode
 
 # Wordpress file
-app/
-conf/
-logs/
+# app/
+# conf/
+# logs/
 
