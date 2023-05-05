@@ -6,7 +6,7 @@ import Layout from '../../layouts/Layout.astro'
 const { slug } = Astro.params;
 const res = await fetch(`${import.meta.env.PUBLIC_API_URL}posts?_embed&slug=${slug}`);
 const [post] = await res.json();
-const renderedContent = post.content.rendered.replace(/http:\/\/astro-blog.local/g, '');
+const renderedContent = post.content.rendered.replace(/http:\/\/blog.cony-design.com/g, '');
 
 export async function getStaticPaths() {
   const data = await fetch(`${import.meta.env.PUBLIC_API_URL}posts`);
